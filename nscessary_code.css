@@ -1,0 +1,149 @@
+=============================================================
+=============================================================
+Click outside of target then work
+=============================================================
+=============================================================
+	$(document).click(function(e){
+		var target  = $("#search");
+		var target2  = $(".search_form");
+		if(!target.is(e.target) && target.has(e.target).length == 0 && !target2.is(e.target) && target2.has(e.target).length == 0){
+			$('.search_form').removeClass('search_active')
+			$('.menu_item').removeClass('hide_item')
+			$('.search_form input').val('')
+			$('.close').removeClass('search_active')
+			$('#search').show()
+		}
+	});
+
+
+=============================================================
+=============================================================
+main menu scoll hide and show (2 div in header section {1st: top small header, 2nd: nain header(menu) })
+=============================================================
+=============================================================
+
+	var lastScrollTop = 0;
+	$(window).scroll(function(event){
+		var st = $(this).scrollTop();
+		if(st > 10){
+			$("header").addClass("downheader");
+			if (st > lastScrollTop){
+				// downscroll code
+				$("header").addClass("downheader");
+			} else {
+				$("header").removeClass("downheader");
+					// upscroll code
+			}
+		}else{
+			$("header").removeClass("downheader");
+		}
+		lastScrollTop = st;
+	});
+
+
+$(window).on('scroll', function(){
+	if ($(window).scrollTop()){
+		$('header').addClass('black');
+	}
+	else
+	{
+		$('header').removeClass('black');
+	}
+});
+................................................
+css class
+................................................
+.downheader{
+	margin-top: -30px;
+}
+header.black{ 
+	padding: 0 100px;
+	transition: .5s;
+	background: #262626;
+}
+
+
+=============================================================
+=============================================================
+main menu scoll hide and show (complicated)
+=============================================================
+=============================================================
+
+
+	$(window).on("scroll", function(){
+		var scrolltop = $(this).scrollTop();
+		var scrollpostion = $(".big_header").scrollTop();
+		if(scrolltop > scrollpostion){
+			$(".header_section").addClass('menubarsizing');
+		}else{
+			$(".header_section").removeClass('menubarsizing');
+		}
+	})
+
+	var lastScrollTop = 0;
+	$(window).scroll(function(event){
+		var st = $(this).scrollTop();
+		var scrollpostion = $(".big_header").scrollTop();
+		if(st > scrollpostion){
+			// $(".header_section").addClass("menubarsizing");
+			if (st > lastScrollTop){
+				// downscroll code
+				$(".header_section").removeClass("menubarsizing2");
+			} else {
+				$(".header_section").addClass("menubarsizing2");
+					// upscroll code
+			}
+		}else{
+			$(".header_section").removeClass("menubarsizing2");
+		}
+		lastScrollTop = st;
+	});
+});
+
+=============================================================
+=============================================================
+Skilling when section window
+=============================================================
+=============================================================
+
+jQuery(document).ready(function() {
+/*MODIFICATION START*/
+  jQuery(document).on('scroll', function(){
+    if(jQuery('html,body').scrollTop() > jQuery('.skill_bar_section').height()){
+/*MODIFICATION END*/
+      jQuery(".progress-bar").each(function() {
+        jQuery(this).find(".progress-content").animate({
+          width: jQuery(this).attr("data-percentage")
+        },6000);
+
+        jQuery(this).find(".progress-number-mark").animate({
+          left: jQuery(this).attr("data-percentage")
+        },{
+          duration: 6000,
+          step: function(now, fx) {
+            var data = Math.round(now);
+            jQuery(this).find(".percent").html(data + "%");
+          }
+        });
+      });
+/*MODIFICATION START*/
+    }
+  });
+/*MODIFICATION END*/
+
+});
+=============================================================
+=============================================================
+Datatable
+=============================================================
+=============================================================
+
+/*$('#myDataTable').DataTable();*/
+
+	 var table = $("#myDataTable").DataTable({
+        lengthChange: true,
+        lengthMenu: [ 5, 10, 15, 25, 50, 100],
+        pageLength: 5,
+        buttons: ['copy', 'excel', 'colvis', 'pdf', 'print']
+  });
+  table.buttons().container().appendTo( '#myDataTable_wrapper .col-md-6:eq(0)');
